@@ -2,17 +2,16 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Smart Medication Application </title>
+<title>Smart Medication reminder Application </title>
 </head>
 <body>
 <h2>Schedule Medication Reminder</h2>
 <form id="Reminder-Form">
-<label>Medication Name:</label>
+<input type="text"id="mrd name"placeholder="Medication Name"required/>
 <input type="data time-local" id="MedTime"required><br><br>
 <button type="Submit">Set reminder</button>
 </form>
-<p id="Status"></p>
-<script>
-const form=document.getElementByTd('reminder form');
-form.add event listener('submit',async(e)=>{
-e.preventdefau
+<h2>Your reminders</h2>
+<div id="reminder list"></div>
+</body>
+</html>
