@@ -1,13 +1,27 @@
 const BACKEND_URL = 'http://127.0.0.1:5000';
 
 function registerUser() {
-  const phone = document.getElementById('phone').value;
-  const pass = document.getElementById('pass').value;
-  const caretaker = document.getElementById('caretaker').value;
+  let phone = document.getElementById('phone').value.trim();
+  const pass = document.getElementById('pass').value.trim();
+  let caretaker = document.getElementById('caretaker').value.trim();
+
+  // Ensure both phone numbers are in international format
+  if (!phone.startsWith("+")) {
+    alert("Enter phone numbers in international format (e.g., +919876543210)");
+    return;
+  }
+
+  if (!caretaker.startsWith("+")) {
+    alert("Enter caretaker number in international format (e.g., +919876543210)");
+    return;
+  }
+
   if (!phone || !pass || !caretaker) return alert("Fill all fields");
+
   localStorage.setItem('user-' + phone, JSON.stringify({ pass, caretaker }));
   alert("Registered successfully!");
 }
+
 
 function loginUser() {
   const phone = document.getElementById('loginPhone').value;
@@ -30,9 +44,7 @@ function addReminder() {
   reminders.push(reminder);
   localStorage.setItem('reminders-' + phone, JSON.stringify(reminders));
 
-  // Schedule notification check
   scheduleCheck(reminder, phone);
-
   alert("Reminder saved!");
   location.reload();
 }
@@ -69,7 +81,11 @@ function scheduleCheck(reminder, phone) {
       const reminders = JSON.parse(localStorage.getItem('reminders-' + phone)) || [];
       const index = reminders.findIndex(r => r.medName === reminder.medName && r.medTime === reminder.medTime);
       if (index !== -1 && !reminders[index].taken) {
-        // Send caretaker alert
+        // Play local alert sound
+        const sound = document.getElementById("alertSound");
+        if (sound) sound.play();
+
+        // Send SMS to caretaker
         const user = JSON.parse(localStorage.getItem('user-' + phone));
         fetch(`${BACKEND_URL}/alert-caretaker`, {
           method: 'POST',
@@ -81,7 +97,7 @@ function scheduleCheck(reminder, phone) {
         }).then(res => res.json())
           .then(data => console.log(data));
       } else {
-        // Send user notification (optional)
+        // Send SMS reminder to user
         fetch(`${BACKEND_URL}/send-notification`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
