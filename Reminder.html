@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>Smart Medication reminder Application </title>
+  <title>Reminders | DigitalDose</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h2>Schedule Medication Reminder</h2>
-<form id="Reminder-Form">
-<input type="text"id="mrd name"placeholder="Medication Name"required/>
-<input type="data time-local" id="MedTime"required><br><br>
-<button type="Submit">Set reminder</button>
-</form>
-<h2>Your reminders</h2>
-<div id="reminder list"></div>
+  <div class="container">
+    <h2>Set New Reminder</h2>
+    <input type="text" id="medName" placeholder="Medicine Name">
+    <input type="datetime-local" id="medTime">
+    <button onclick="addReminder()">Schedule</button>
+    <hr>
+    <h3>Active Reminders</h3>
+    <ul id="reminderList"></ul>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
