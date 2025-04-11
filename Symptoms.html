@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Reminders</title>
+<meta charset="UTF-8">
+</head>
+<body>
+<h2>Medication Reminders</h2>
+<form id="reminder-form">
+<input type="text" id="med-name"
+placeholder="Medicine Name"
+required><br><br>
+<input type="time" id="reminder-time"
+required><br><br>
+<button type="submit">set Reminder</button>
+<input type="hidden" id="edit-index"value="-1">
+</form>
+<h3>Your Reminders</h3>
+<div id="reminder-list"></div>
+<h3>Symptom Checker</h3>
+<form id="Symptom-input">
+<option value="">--Select Sympton--</option>
+<option value="cold">Cold</option>
+<option value="headache">Headache</option>
+<option value="fever">Fever</option>
+<option value="acidity">Acidity</option>
+<option value="cough">Cough</option>
+<option value="ear pain">Ear Pain</option>
+<option value="minor burns">Minor Burns</option>
+<option value="cracked heels">Cracked Heels</option>
+<option value="tiredness">Tiredness</option>
+<option value="constipation">Constipation</option>
+<option value="indigestion">Indigestion</option>
+<option value="mouth ulcer">Mouth Ulcer</option>
+<option value="backpain">Backpain</option>
+<option value="dizziness">Dizziness</option>
+<option value="tooth ache">Tooth Ache</option>
+<option value="bleeding gums">Bleeding Gums</option>
+</select>
+<buttontype="submit">Check</button>
+</form>
+<div id="medicine-result"></div>
+<br><button id="logout-btn">Logout</button>
+<script src="script.js"></script>
+</body>
+</html>
