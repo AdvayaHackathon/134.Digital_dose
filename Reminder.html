@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang+"en">
+<head>
+<meta charset+"UTF-8">
+<title>Smart Medication Application </tile>
+</head>
+<body>
+<h2>Schedule Medication Reminder</h2>
+<form id="Reminder Form">
+<label>Medication Name:</label>
+<input type="data time-local" id="MedTime"required><br><br>
+<button type="Submit">Set reminder</button>
+</form>
+<p id="Status"></p>
+<script>
+const form=document.getElementByTd('reminder form');
+form.add event listener('submit',async(e)=>{
+e.preventdefau
