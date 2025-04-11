@@ -23,7 +23,7 @@ function loadReminders(){
       el.innerHTML=`
       ${r.name}-${r.time}
       <button
-      onclick="editRemainder(${i})">Edit</button>
+      onclick="editReminder(${i})">Edit</button>
       `;
       rList.appendChild(el);
     });
@@ -33,7 +33,7 @@ window.editReminder=function(index){
   const reminders=JSON.parse(localStorage.getItem(reminderKey)||[]");
   const reminder=reminders[index];
   document.getElementByID('med-name').value=reminder.name;
-  document.getElementByID('remainder-time').value=reminder.time;
+  document.getElementByID('reminder-time').value=reminder.time;
   editIndexInput.value=index;
 }
 if(rForm){
