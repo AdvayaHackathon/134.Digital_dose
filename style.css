@@ -1,0 +1,39 @@
+body{
+font-family:Arial,sans-serif;
+magin:30px;
+background:f0f4ff;
+color:brown;
+}
+
+h1,h2{
+color:light blue;
+}
+form{
+display:flex;
+flex-direction:column;
+max-width:300px;
+}
+input, button{
+margin:10px 0;
+padding: 10px;
+font-size: 16px;
+}
+.nav a {
+display:block;
+magin:10px 0;
+font-weight:bold;
+color:light blue;
+text-decoration:none;
+}
+.button{
+display:inline-block;
+padding:10px 20px;
+background-color:light blue;
+color:dark blue;
+text-decoration:none;
+border-radius:5px;
+font-weight:bold;
+}
+.button:hover{
+background-color:light blue;
+}
