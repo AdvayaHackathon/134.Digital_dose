@@ -1,72 +1,111 @@
-document.addEventListner('DOMContentLoaded',() => {
-const reminderForm=document.getElementById('reminder-form');
+document.addEventListener('DOMContentLoaded',() => {
+const rForm=document.getElementById('reminder-form');
 const symptomForm=document.getElementById('symptom-form');
-const authForm=document.getElementById('auth-form');
+const loginForm=document.getElementById('login-form');
 const reminderList=document.getElementById('reminder-list');
-
-if(reminderForm){
-reminderForm.addEventLister('submit', e=>{
+const logoutBtn=document.getElementByID('logout-btn');
+const editIndexInput=document.getElementByID('edit-index');
+const protectedPage=window.location.pathname.includes('reminder.html');
+const loggedUser=localstorage.getItem('loggedUser');
+const reminderKey=r$$-${loggedUser};
+  if(protectedPage && !loggedUser)}alert("Please login first.");
+  window.location.href="login.html";
+}
+function loadReminders(){
+  rList.innerHTML="";
+  const reminders=JSON.parse(Localstorage.getItem(reminderKey)||"[]");
+  if(reminders.length==0){
+    rList.innerHTML="<P>No reminder yet.</p>";
+  }else{
+    reminders.forEach((r,i)=>{
+      const el=
+        document.createElement('div');
+      el.innerHTML=`
+      ${r.name}-${r.time}
+      <button
+      onclick="editRemainder(${i})">Edit</button>
+      `;
+      rList.appendChild(el);
+    });
+  }
+}
+window.editReminder=function(index){
+  const reminders=JSON.parse(localStorage.getItem(reminderKey)||[]");
+  const reminder=reminders[index];
+  document.getElementByID('med-name').value=reminder.name;
+  document.getElementByID('remainder-time').value=reminder.time;
+  editIndexInput.value=index;
+}
+if(rForm){
+rForm.addEventListener('submit', e=>{
 e.preventDefault();
-const name=docment.getElementById('med-name').value;
-const name=docment.getElementById('reminder-time').value;
-
-const reminder={name,time};
-let reminders=JSON.parse(localStorage.getItem('reminders') || "[]");
+const med=document.getElementById('med-name').value;
+const time=document.getElementById('reminder-time').value;
+const index=parselnt(editIndexInput.value);
+let reminders=JSON.parse(localStorage.getItem(reminderKey) || "[]");
+  if(index>=0){
+    reminders[index]={name:med,time};
+    editIndexInput.value=-1;
+  }else{
+    reminders.push({name:med,time});
+  }
 reminders.push(reminder);
 localStorage.setItem('reminders',JSON.stringify(reminders));
+  loadReminders();
+  rForm.reset();
 alert("Reminder saved!");
 });
 }
-
-if(reminderList) {
-const reminders=JON.parse(localStorage.getItem('reminders') || "[]");
-if(reminderList) {
-const reminders=JSON.parse(localStorage.getItem('reminder') || "[]");
-if(reminders.length===0) {
-reminderList.innerHTML="<p>No reminder yet.</p>";
-}
-else{
-reminders.foreach(r=> {
-const el=document.createElement('div');
-el.textContent=${r.name}-${r.time};
-reminderlist.appendchild(el);
-});
-}
-}
-if(sympyonForm){
-symptomForm.addEventListener('submit',e=>{
+if(rList) load Reminders();
+if(sForm){
+sForm.addEventListener('submit',e=>{
 e.preventDefault();
-const symptom=document.getElementById('symptom-input').value.toLowerase();
+const input=document.getElementById('symptom-input').value.toLowerase();
 const result=document.getElementById('Medicine-result');
-
 let suggestion="Consult a doctor.";
-if(sympton.includes("cold"))suggestion="Take Paracetamol.";
-if(sympton.includes("headache"))suggestion="Take Ibuprofen.";
-if(sympton.includes("fever"))suggestion="Take Crocin.";
-if(sympton.includes("acidity"))suggestion="Take Ranitidine.";
-if(sympton.includes("cough"))suggestion="Take dextromethorphan(dry cough),expectortants(wet cough).";
-if(sympton.includes("ear pain"))suggestion="Put Solowax drops(wax softens).";
-if(sympton.includes("minor burns"))suggestion="Apply Silver sulpadiazine cream.";
-if(sympton.includes("craked heels"))suggestion="Apply Urea based cream.";
-if(sympton.includes("tiredness"))suggestion="Take Vitamin B12 or multivitamin tablet.";
-if(sympton.includes("constipation"))suggestion="Take Lactulose tablet .";
-if(sympton.includes("indigestion"))suggestion="Take Digene .";
-if(sympton.includes("mouth ulcer"))suggestion="Take vitamin b complex.";
-if(sympton.includes("backpain"))suggestion="Take diclopenac .";
-if(sympton.includes("dizziness"))suggestion="Take Betahistine.";
-if (symptom.includes("tooth ache")) suggestion="Apply clove oil.";
-if (symptom.includes("bleeding gums")) suggestion="Vitamin c.";
-result.innerHTML=`<p><strong>suggested medicine:<strong>${suggestion}<\p>`;
+const check=str=>input.includes(Str);
+if(check("cold"))suggestion="Take Paracetamol.";
+if(check("headache"))suggestion="Take Ibuprofen.";
+if(check("fever"))suggestion="Take Crocin.";
+if(check("acidity"))suggestion="Take Ranitidine.";
+if(check("cough"))suggestion="Take dextromethorphan(dry cough),expectortants(wet cough).";
+if(check("ear pain"))suggestion="Put Solowax drops(wax softens).";
+if(check("minor burns"))suggestion="Apply Silver sulpadiazine cream.";
+if(check("craked heels"))suggestion="Apply Urea based cream.";
+if(check("tiredness"))suggestion="Take Vitamin B12 or multivitamin tablet.";
+if(check("constipation"))suggestion="Take Lactulose tablet .";
+if(check("indigestion"))suggestion="Take Digene .";
+if(check("mouth ulcer"))suggestion="Take vitamin b complex.";
+if(check("backpain"))suggestion="Take diclopenac .";
+if(check("dizziness"))suggestion="Take Betahistine.";
+if(check("tooth ache")) suggestion="Apply clove oil.";
+if(check("bleeding gums")) suggestion="Vitamin c.";
+result.innerHTML=`<p><strong>suggested medicine:</strong>${suggestion}</p>;
 });
 }
-  if(authform) {
-    authform.addEventListener('submit',e=>{
+  if(loginForm) {
+    loginForm.addEventListener('submit',e=>{
       e.preventDefault();
-      const username=document.getElementByID('username').value;
-      const password=document.getElementByID('password').value;
-      localstorage.setItem('user',JSON.stringify([username,password}));
-      alert("Login/Registration successful!");
-    }):
+      const user=document.getElementByID('username').value;
+      const pass=document.getElementByID('password').value;
+      let stored=JSON.parse(localstorage.getltem('u$$')||'{}');
+      if(stored[user]&&stored[user]!==pass){
+      alert("Incorrect password!");
+      return;
+      }
+      stored[user]=pass;
+      localStorage.setItem('u&&',JSON.stringfy(stored));
+      localStorage.setItem('loggedUser',User);
+      alert("Login successful!");
+      window.location.href="remainder.html";
+      });
+      }
+      if(logoutBtn){
+      logoutBtn.addEventListener('click',()=>{
+      localStorage.removeItem('logged User');
+      alert("Logged out.");
+      window.location.href="login.html";
+    });
   }
 });
 
