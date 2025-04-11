@@ -50,11 +50,52 @@ if(sympton.includes("minor burns"))suggestion="Apply Silver sulpadiazine cream."
 if(sympton.includes("craked heels"))suggestion="Apply Urea based cream.";
 if(sympton.includes("tiredness"))suggestion="Take Vitamin B12 or multivitamin tablet.";
 if(sympton.includes("constipation"))suggestion="Take Lactulose tablet .";
-if(sympton.includes(""))suggestion="Take .";
-if(sympton.includes(""))suggestion="Take .";
-if(sympton.includes(""))suggestion="Take .";
-if(sympton.includes(""))suggestion="Take .";
+if(sympton.includes("indigestion"))suggestion="Take Digene .";
+if(sympton.includes("mouth ulcer"))suggestion="Take vitamin b complex.";
+if(sympton.includes("backpain"))suggestion="Take diclopenac .";
+if(sympton.includes("dizziness"))suggestion="Take Betahistine.";
+if (symptom.includes("tooth ache")) suggestion="Apply clove oil.";
+if (symptom.includes("bleeding gums")) suggestion="Vitamin c.";
+result.innerHTML=`<p><strong>suggested medicine:<strong>${suggestion}<\p>`;
+});
+}
+  if(authform) {
+    authform.addEventListener('submit',e=>{
+      e.preventDefault();
+      const username=document.getElementByID('username').value;
+      const password=document.getElementByID('password').value;
+      localstorage.setItem('user',JSON.stringify([username,password}));
+      alert("Login/Registration successful!");
+    }):
+  }
+});
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
 
 
 
